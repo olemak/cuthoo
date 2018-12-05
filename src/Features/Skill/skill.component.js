@@ -1,19 +1,11 @@
 import React from "react";
 import { SkillImprovementContext } from "./skill-improvement.context";
+import { getValue } from "./skill.functions";
 
 export class Skill extends React.Component {
-    getSum(total, current) {
-        return total + current;
-    }
-
     render() {
-        const currentSkill = this.context.skills.find(
-            skill => skill.id === this.props.id
-        );
-
-        const currentValue = currentSkill.improvements
-            .map(improvement => improvement.value)
-            .reduce(this.getSum, this.props.base);
+        const currentSkill = this.getImprovements();
+        const currentValue = getValue(currentSkill, this.props.base);
 
         return (
             <li>
@@ -21,6 +13,10 @@ export class Skill extends React.Component {
                 {Math.floor(currentValue / 2)} | {Math.floor(currentValue / 5)}
             </li>
         );
+    }
+
+    getImprovements() {
+        return this.context.skills.find(skill => skill.id === this.props.id);
     }
 }
 Skill.contextType = SkillImprovementContext;
