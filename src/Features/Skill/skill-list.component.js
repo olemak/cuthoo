@@ -5,7 +5,12 @@ import { getValue, getImprovements } from "./skill.functions";
 export class SkillList extends React.Component {
     static displayName = "SkillList";
     static contextType = SkillImprovementContext;
-    static Wrapper = ({ children } = {}) => <section>{children}</section>;
+
+    // #region partials
+    static Wrapper = ({ children } = {}) => (
+        <section className="skill-list__list">{children}</section>
+    );
+
     static Item = ({ name, value, className } = {}) => (
         <article className={className}>
             <span>{name} </span>
@@ -14,6 +19,7 @@ export class SkillList extends React.Component {
             <span>{Math.floor(value / 5)}</span>
         </article>
     );
+    // #endregion
 
     render() {
         return (
