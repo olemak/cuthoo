@@ -7,3 +7,7 @@ export function getValue(currentSkill, base) {
         .map(improvement => improvement.value)
         .reduce(getSum, base);
 }
+
+export function getImprovements(skillImprovements, id) {
+    return skillImprovements.find(skill => skill.id === id);
+}
