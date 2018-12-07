@@ -1,28 +1,13 @@
 import React from "react";
 import { SkillImprovementContext } from "./skill-improvement.context";
 import { getValue, getImprovements } from "./skill.functions";
+import {
+    ISkillListComponentProps,
+    ISkillListWrapperProps,
+    IItemPartialProps,
+    IRenderItemProps
+} from "./skill.interfaces";
 
-// #region interfaces
-export interface ISkillListComponentProps {
-    skills: ISkill[];
-}
-export interface ISkill {
-    id: string;
-    name: string;
-    base: number;
-    description?: string;
-}
-export interface ISkillListWrapperProps {
-    children: React.ReactNode;
-    className?: string;
-}
-export interface IRenderItemProps extends ISkill {}
-export interface IItemPartialProps {
-    name: string;
-    value: number;
-    className: string;
-}
-// #endregion
 export class SkillList extends React.Component<ISkillListComponentProps> {
     static displayName = "SkillList";
     static contextType = SkillImprovementContext;
