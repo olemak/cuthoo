@@ -2,16 +2,37 @@ import React from "react";
 import { SkillImprovementContext } from "./skill-improvement.context";
 import { getValue, getImprovements } from "./skill.functions";
 
-export class SkillList extends React.Component {
+// #region interfaces
+export interface ISkillListComponentProps {
+    skills: ISkill[];
+}
+export interface ISkill {
+    id: string;
+    name: string;
+    base: number;
+    description?: string;
+}
+export interface ISkillListWrapperProps {
+    children: React.ReactNode;
+    className?: string;
+}
+export interface IRenderItemProps extends ISkill {}
+export interface IItemPartialProps {
+    name: string;
+    value: number;
+    className: string;
+}
+// #endregion
+export class SkillList extends React.Component<ISkillListComponentProps> {
     static displayName = "SkillList";
     static contextType = SkillImprovementContext;
 
     // #region partials
-    static Wrapper = ({ children, className } = {}) => (
+    static Wrapper = ({ children, className }: ISkillListWrapperProps) => (
         <section className={className}>{children}</section>
     );
 
-    static Item = ({ name, value, className } = {}) => (
+    static Item = ({ name, value, className }: IItemPartialProps) => (
         <article className={className}>
             <span>{name} </span>
             <span>{value} </span>
@@ -29,7 +50,7 @@ export class SkillList extends React.Component {
         );
     }
 
-    renderItem = ({ id, base, name } = {}) => {
+    renderItem = ({ id, base, name }: IRenderItemProps) => {
         const currentValue = getValue(
             getImprovements(this.context.skills, id),
             base
