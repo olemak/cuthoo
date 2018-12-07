@@ -7,8 +7,8 @@ export class SkillList extends React.Component {
     static contextType = SkillImprovementContext;
 
     // #region partials
-    static Wrapper = ({ children } = {}) => (
-        <section className="skill-list__list">{children}</section>
+    static Wrapper = ({ children, className } = {}) => (
+        <section className={className}>{children}</section>
     );
 
     static Item = ({ name, value, className } = {}) => (
@@ -23,7 +23,7 @@ export class SkillList extends React.Component {
 
     render() {
         return (
-            <SkillList.Wrapper>
+            <SkillList.Wrapper className="skill-list">
                 {this.props.skills.map(this.renderItem)}
             </SkillList.Wrapper>
         );
